@@ -17,16 +17,6 @@ public partial class Level : IIdentifiable, IIdentifiable<int>
 
     [Attr] public decimal WorkshopId { get; set; }
 
-    [Attr] public bool Valid { get; set; }
-
-    [Attr] public float Validation { get; set; }
-
-    [Attr] public float Gold { get; set; }
-
-    [Attr] public float Silver { get; set; }
-
-    [Attr] public float Bronze { get; set; }
-
     [Attr] public decimal AuthorId { get; set; }
 
     [Attr] public string FileHash { get; set; } = null!;
@@ -40,6 +30,8 @@ public partial class Level : IIdentifiable, IIdentifiable<int>
     [Attr] public int? ReplacedBy { get; set; }
 
     [Attr] public bool Deleted { get; set; }
+
+    public virtual Metadata MetadataNavigation { get; set; } = null!;
 
     string? IIdentifiable.StringId
     {
