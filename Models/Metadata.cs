@@ -16,7 +16,7 @@ public partial class Metadata : IIdentifiable, IIdentifiable<string>
     [Attr] public int Ground { get; set; }
     [Attr] public int Skybox { get; set; }
 
-    public string? StringId
+    string? IIdentifiable.StringId
     {
         get => Hash;
         set
@@ -25,7 +25,7 @@ public partial class Metadata : IIdentifiable, IIdentifiable<string>
         }
     }
 
-    public string? LocalId
+    string? IIdentifiable.LocalId
     {
         get => Hash;
         set
@@ -34,7 +34,7 @@ public partial class Metadata : IIdentifiable, IIdentifiable<string>
         }
     }
 
-    public string Id
+    string IIdentifiable<string>.Id
     {
         get=> Hash;
         set
