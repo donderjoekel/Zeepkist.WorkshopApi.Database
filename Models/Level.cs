@@ -31,8 +31,6 @@ public partial class Level : IIdentifiable, IIdentifiable<int>
 
     [Attr] public bool Deleted { get; set; }
 
-    public virtual Metadata MetadataNavigation { get; set; } = null!;
-
     string? IIdentifiable.StringId
     {
         get => Id.ToString();

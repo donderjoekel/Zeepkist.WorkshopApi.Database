@@ -16,8 +16,6 @@ public partial class Metadata : IIdentifiable, IIdentifiable<string>
     [Attr] public int Ground { get; set; }
     [Attr] public int Skybox { get; set; }
 
-    public virtual ICollection<Level> Levels { get; set; } = new List<Level>();
-
     public string? StringId
     {
         get => Hash;

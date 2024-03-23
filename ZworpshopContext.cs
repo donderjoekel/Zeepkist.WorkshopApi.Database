@@ -41,10 +41,6 @@ public partial class ZworpshopContext : DbContext
             entity.Property(e => e.ReplacedBy).HasColumnName("replaced_by");
             entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
             entity.Property(e => e.WorkshopId).HasColumnName("workshop_id");
-
-            entity
-                .HasOne<Metadata>(x => x.MetadataNavigation)
-                .WithMany(x => x.Levels);
         });
 
         modelBuilder.Entity<Metadata>(entity =>
