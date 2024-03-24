@@ -37,15 +37,15 @@ public partial class ZworpshopContext : DbContext
             entity.Property(e => e.FileUid).HasColumnName("file_uid");
             entity.Property(e => e.FileUrl).HasColumnName("file_url");
             entity.Property(e => e.ImageUrl).HasColumnName("image_url");
+            entity.Property(e => e.MetadataId).HasColumnName("metadata_id");
             entity.Property(e => e.Name).HasColumnName("name");
             entity.Property(e => e.ReplacedBy).HasColumnName("replaced_by");
             entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
             entity.Property(e => e.WorkshopId).HasColumnName("workshop_id");
-            entity.Property(e => e.MetadataId).HasColumnName("metadata_id");
 
-            entity.HasOne<Metadata>(e => e.MetadataNavigation)
-                .WithOne(x => x.LevelNavigation)
-                .HasForeignKey<Level>(e => e.MetadataId)
+            entity.HasOne(d => d.Metadata).WithMany(p => p.Levels)
+                .HasForeignKey(d => d.MetadataId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("levels_metadata_id_fkey");
         });
 
@@ -58,16 +58,16 @@ public partial class ZworpshopContext : DbContext
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("id");
-            entity.Property(e => e.Hash).HasColumnName("hash");
-            entity.Property(e => e.Checkpoints).HasColumnName("checkpoints");
             entity.Property(e => e.Blocks).HasColumnName("blocks");
             entity.Property(e => e.Bronze).HasColumnName("bronze");
+            entity.Property(e => e.Checkpoints).HasColumnName("checkpoints");
             entity.Property(e => e.Gold).HasColumnName("gold");
+            entity.Property(e => e.Ground).HasColumnName("ground");
+            entity.Property(e => e.Hash).HasColumnName("hash");
             entity.Property(e => e.Silver).HasColumnName("silver");
+            entity.Property(e => e.Skybox).HasColumnName("skybox");
             entity.Property(e => e.Valid).HasColumnName("valid");
             entity.Property(e => e.Validation).HasColumnName("validation");
-            entity.Property(e => e.Ground).HasColumnName("ground");
-            entity.Property(e => e.Skybox).HasColumnName("skybox");
         });
 
         OnModelCreatingPartial(modelBuilder);
