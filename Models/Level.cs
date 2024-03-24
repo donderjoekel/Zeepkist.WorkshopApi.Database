@@ -31,6 +31,10 @@ public partial class Level : IIdentifiable, IIdentifiable<int>
 
     [Attr] public bool Deleted { get; set; }
 
+    [Attr] public int MetadataId { get; set; }
+
+    [HasOne(PublicName = "Metadata")] public virtual Metadata MetadataNavigation { get; set; }
+
     string? IIdentifiable.StringId
     {
         get => Id.ToString();

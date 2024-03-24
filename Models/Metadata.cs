@@ -3,8 +3,9 @@ using JsonApiDotNetCore.Resources.Annotations;
 
 namespace TNRD.Zeepkist.WorkshopApi.Database.Models;
 
-public partial class Metadata : IIdentifiable, IIdentifiable<string>
+public partial class Metadata : IIdentifiable, IIdentifiable<int>
 {
+    [Attr] public int Id { get; set; }
     [Attr] public string Hash { get; set; } = null!;
     [Attr] public int Checkpoints { get; set; }
     [Attr] public string Blocks { get; set; } = null!;
@@ -28,15 +29,6 @@ public partial class Metadata : IIdentifiable, IIdentifiable<string>
     string? IIdentifiable.LocalId
     {
         get => Hash;
-        set
-        {
-            // Left empty on purpose
-        }
-    }
-
-    string IIdentifiable<string>.Id
-    {
-        get=> Hash;
         set
         {
             // Left empty on purpose

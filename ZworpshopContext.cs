@@ -41,14 +41,23 @@ public partial class ZworpshopContext : DbContext
             entity.Property(e => e.ReplacedBy).HasColumnName("replaced_by");
             entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
             entity.Property(e => e.WorkshopId).HasColumnName("workshop_id");
+            entity.Property(e => e.MetadataId).HasColumnName("metadata_id");
+
+            entity.HasOne<Metadata>(e => e.MetadataNavigation)
+                .WithMany()
+                .HasForeignKey(e => e.MetadataId)
+                .HasConstraintName("levels_metadata_id_fkey");
         });
 
         modelBuilder.Entity<Metadata>(entity =>
         {
-            entity.HasKey(e => e.Hash).HasName("metadata_pkey");
+            entity.HasKey(e => e.Id).HasName("metadata_pkey");
 
             entity.ToTable("metadata");
 
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasColumnName("id");
             entity.Property(e => e.Hash).HasColumnName("hash");
             entity.Property(e => e.Checkpoints).HasColumnName("checkpoints");
             entity.Property(e => e.Blocks).HasColumnName("blocks");
