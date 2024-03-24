@@ -33,7 +33,7 @@ public partial class Level : IIdentifiable, IIdentifiable<int>
 
     [Attr] public int MetadataId { get; set; }
 
-    [HasOne(PublicName = "Metadata")] public virtual Metadata MetadataNavigation { get; set; }
+    [HasOne(PublicName = "metadata")] public virtual Metadata MetadataNavigation { get; set; }
 
     string? IIdentifiable.StringId
     {

@@ -44,8 +44,8 @@ public partial class ZworpshopContext : DbContext
             entity.Property(e => e.MetadataId).HasColumnName("metadata_id");
 
             entity.HasOne<Metadata>(e => e.MetadataNavigation)
-                .WithMany()
-                .HasForeignKey(e => e.MetadataId)
+                .WithOne(x => x.LevelNavigation)
+                .HasForeignKey<Level>(e => e.MetadataId)
                 .HasConstraintName("levels_metadata_id_fkey");
         });
 
