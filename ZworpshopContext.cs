@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using TNRD.Zeepkist.WorkshopApi.Database.Models;
 
 namespace TNRD.Zeepkist.WorkshopApi.Database;
@@ -17,6 +19,12 @@ public partial class ZworpshopContext : DbContext
     public virtual DbSet<Level> Levels { get; set; }
 
     public virtual DbSet<Metadata> Metadata { get; set; }
+
+    public virtual DbSet<Request> Requests { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseNpgsql("Host=65.109.174.218;Port=5432;Database=zworpshop;Username=postgres;Password=dYFrguHcr4XPDGT4o6cwM2LiJJ8TgwTKgLRj6LZTwXHxtEpXxAcCjUxMj3sccdrJ");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -68,6 +76,23 @@ public partial class ZworpshopContext : DbContext
             entity.Property(e => e.Skybox).HasColumnName("skybox");
             entity.Property(e => e.Valid).HasColumnName("valid");
             entity.Property(e => e.Validation).HasColumnName("validation");
+        });
+
+        modelBuilder.Entity<Request>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("requests_pkey");
+
+            entity.ToTable("requests");
+
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasColumnName("id");
+            entity.Property(e => e.DateCreated)
+                .HasDefaultValueSql("now()")
+                .HasColumnName("date_created");
+            entity.Property(e => e.Hash).HasColumnName("hash");
+            entity.Property(e => e.Uid).HasColumnName("uid");
+            entity.Property(e => e.WorkshopId).HasColumnName("workshop_id");
         });
 
         OnModelCreatingPartial(modelBuilder);

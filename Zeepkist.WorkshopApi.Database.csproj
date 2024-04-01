@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <AssemblyName>TNRD.Zeepkist.WorkshopApi.Database</AssemblyName>
         <RootNamespace>TNRD.Zeepkist.WorkshopApi.Database</RootNamespace>
-        <Version>2.2.1</Version>
+        <Version>2.3.0</Version>
     </PropertyGroup>
 
     <ItemGroup>
